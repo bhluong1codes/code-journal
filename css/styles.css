@@ -21,7 +21,8 @@ h1 {
 
 img {
   width: 100%;
-  height: 400px;
+  height: 100%;
+  overflow: hidden;
   border-radius: 5px;
 }
 
@@ -36,6 +37,9 @@ input,
 textarea {
   border: 1px solid #b6b6b6;
   border-radius: 3px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: "Titillium Web", sans-serif;
 }
 
 input {
@@ -45,13 +49,6 @@ input {
 textarea {
   min-height: 150px;
   padding: 8px;
-  font-family: "Titillium Web", sans-serif;
-  font-weight: normal;
-}
-
-.form-field input,
-.form-field textarea {
-  font-size: 18px;
 }
 
 input:focus,
@@ -85,10 +82,11 @@ label {
 
 @media only screen and (min-width: 768px) {
   .img-container {
-    height: 410px;
+    height: 400px;
   }
 
   .title-label {
     padding-top: 0;
   }
+}
 }

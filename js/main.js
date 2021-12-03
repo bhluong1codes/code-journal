@@ -1,13 +1,9 @@
 /* global data */
 /* exported data */
-
-var $photoUrl = document.querySelector('#imgurl');
 var $img = document.querySelector('img');
+var $form = document.querySelector('form');
 
-$photoUrl.addEventListener('input', function (event) {
-  if ($photoUrl.value === '' || !$photoUrl.value.includes('http')) {
-    $img.src = 'images/placeholder-image-square.jpg';
-  } else {
-    $img.src = $photoUrl.value;
-  }
+$form.addEventListener('submit', function (event) {
+  $form.reset();
+  $img.src = 'images/placeholder-image-square.jpg';
 });

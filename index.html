@@ -42,7 +42,9 @@
         <form action="" method="get">
           <div class="row">
             <div class="column-half">
-              <img src="images\placeholder-image-square.jpg" alt="">
+              <div class="img-container">
+                <img src="images\placeholder-image-square.jpg" alt="">
+              </div>
             </div>
             <div class="column-half">
               <div class="form-field title-label">
@@ -51,15 +53,15 @@
               </div>
               <div class="form-field">
                 <label for="imgurl">Photo URL</label>
-                <input type="text" name="imgurl" id="imgurl" required>
+                <input type="url" name="imgurl" id="imgurl" required>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="column-full">
               <div class="form-field">
-                <label for="comments">Notes</label>
-                <textarea name="comments" id="comments" required></textarea>
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" required></textarea>
               </div>
             </div>
           </div>
