@@ -51,27 +51,54 @@ $form.addEventListener('submit', function (event) {
 
 function createEntry(event) {
   var $entries = document.querySelector('.entries-list');
-  for (var i = 0; i < data.entries.length; i++) {
-    var $entry = document.createElement('li');
-    $entry.setAttribute('class', 'row');
-    var $divCol = document.createElement('div');
-    $divCol.setAttribute('class', 'column-half');
-    var $divCol2 = document.createElement('div');
-    $divCol2.setAttribute('class', 'column-half');
-    var $imgContainer = document.createElement('div');
-    $imgContainer.setAttribute('class', 'img-container');
-    var $img = document.createElement('img');
-    $img.setAttribute('src', data.entries[i].photoUrl);
-    var $h3 = document.createElement('h3');
-    $h3.textContent = data.entries[i].title;
-    var $p = document.createElement('p');
-    $p.textContent = data.entries[i].notes;
-
-    $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
-    $entry.appendChild($divCol2).appendChild($h3);
-    $divCol2.appendChild($p);
-    $entries.appendChild($entry);
+  var $noEntry = document.createElement('li');
+  $noEntry.setAttribute('class', 'no-entries-msg');
+  if (data.entries.length === 0) {
+    $entries.appendChild($noEntry);
+  } else if (data.entries.length > 0) {
+    for (var i = 0; i < data.entries.length; i++) {
+      var $entry = document.createElement('li');
+      $entry.setAttribute('class', 'row');
+      var $divCol = document.createElement('div');
+      $divCol.setAttribute('class', 'column-half');
+      var $divCol2 = document.createElement('div');
+      $divCol2.setAttribute('class', 'column-half');
+      var $imgContainer = document.createElement('div');
+      $imgContainer.setAttribute('class', 'img-container');
+      var $img = document.createElement('img');
+      $img.setAttribute('src', data.entries[i].photoUrl);
+      var $h3 = document.createElement('h3');
+      $h3.textContent = data.entries[i].title;
+      var $p = document.createElement('p');
+      $p.textContent = data.entries[i].notes;
+      $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
+      $entry.appendChild($divCol2).appendChild($h3);
+      $divCol2.appendChild($p);
+      $entries.appendChild($entry);
+    }
+    var $childNodes = $entries.childNodes;
+    $childNodes[1].remove();
   }
+
 }
 
 window.addEventListener('DOMContentLoaded', createEntry);
+
+var $body = document.querySelector('body');
+var $view = document.querySelectorAll('.view');
+
+function viewSwap(event) {
+  if (event.target.matches('.link')) {
+    var $dataView = event.target.getAttribute('data-view');
+    for (var i = 0; i < $view.length; i++) {
+      if ($dataView === $view[i].getAttribute('data-view')) {
+        $view[i].className = 'view';
+      } else {
+        $view[i].className = 'view hidden';
+      }
+    }
+  }
+
+}
+
+$body.addEventListener('click', viewSwap);

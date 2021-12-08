@@ -26,8 +26,8 @@
         <div class="column-full">
           <div class="header-txt">
             <ul class="nav-items">
-              <li><a href="">Code Journal</a></li>
-              <li><a href="">Entries</a></li>
+              <li class="link" data-view="entry-form">Code Journal</li>
+              <li class="link" data-view="entries">Entries</li>
             </ul>
           </div>
         </div>
@@ -35,8 +35,8 @@
     </div>
   </header>
   <main>
-    <div data-view="entry-form" class="">
-      <div class="container">
+    <div class="container">
+      <div data-view="entry-form" class="view">
         <div class="row">
           <div class="column-full">
             <h2>New Entry</h2>
@@ -75,9 +75,7 @@
           </div>
         </form>
       </div>
-    </div>
-    <div data-view="entries">
-      <div class="container">
+      <div data-view="entries" class="view hidden">
         <div class="row">
           <div class="column-full entries-subheader">
             <h2>Entries</h2>
@@ -85,6 +83,7 @@
           </div>
         </div>
         <ul class="entries-list">
+          <li class="no-entries-msg">No entries have been recorded.</li>
         </ul>
       </div>
     </div>
@@ -93,3 +92,10 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
+<!--
+https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg
+
+https://images.pexels.com/photos/1536428/pexels-photo-1536428.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500
+
+https://upload.wikimedia.org/wikipedia/commons/a/aa/Dawn_on_the_S_rim_of_the_Grand_Canyon_%288645178272%29.jpg -->
