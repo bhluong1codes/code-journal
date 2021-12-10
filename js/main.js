@@ -31,6 +31,7 @@ $form.addEventListener('submit', function (event) {
   data.entries.unshift(entry);
   $form.reset();
   $img.src = 'images/placeholder-image-square.jpg';
+  addEntry();
 });
 
 // <li class="row">
@@ -99,6 +100,28 @@ function viewSwap(event) {
     }
   }
 
+}
+
+function addEntry(event) {
+  var $entries = document.querySelector('.entries-list');
+  var $entry = document.createElement('li');
+  $entry.setAttribute('class', 'row');
+  var $divCol = document.createElement('div');
+  $divCol.setAttribute('class', 'column-half');
+  var $divCol2 = document.createElement('div');
+  $divCol2.setAttribute('class', 'column-half');
+  var $imgContainer = document.createElement('div');
+  $imgContainer.setAttribute('class', 'img-container');
+  var $img = document.createElement('img');
+  $img.setAttribute('src', data.entries[0].photoUrl);
+  var $h3 = document.createElement('h3');
+  $h3.textContent = data.entries[0].title;
+  var $p = document.createElement('p');
+  $p.textContent = data.entries[0].notes;
+  $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
+  $entry.appendChild($divCol2).appendChild($h3);
+  $divCol2.appendChild($p);
+  $entries.prepend($entry);
 }
 
 $body.addEventListener('click', viewSwap);
