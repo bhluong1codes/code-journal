@@ -89,7 +89,7 @@ var $body = document.querySelector('body');
 var $view = document.querySelectorAll('.view');
 
 function viewSwap(event) {
-  if (event.target.matches('.link')) {
+  if (event.target.className.includes('newBtn') || event.target.matches('.link')) {
     var $dataView = event.target.getAttribute('data-view');
     for (var i = 0; i < $view.length; i++) {
       if ($dataView === $view[i].getAttribute('data-view')) {
@@ -99,7 +99,19 @@ function viewSwap(event) {
       }
     }
   }
+}
 
+function submitSwap(event) {
+  if (event.target.tagName === 'FORM') {
+    var $dataView = event.target.getAttribute('data-view');
+    for (var i = 0; i < $view.length; i++) {
+      if ($dataView === $view[i].getAttribute('data-view')) {
+        $view[i].className = 'view';
+      } else {
+        $view[i].className = 'view hidden';
+      }
+    }
+  }
 }
 
 function addEntry(event) {
@@ -122,6 +134,12 @@ function addEntry(event) {
   $entry.appendChild($divCol2).appendChild($h3);
   $divCol2.appendChild($p);
   $entries.prepend($entry);
+  var $noEntries = document.querySelector('.no-entries-msg');
+  if ($noEntries) {
+    $noEntries.remove();
+  }
+
 }
 
 $body.addEventListener('click', viewSwap);
+$body.addEventListener('submit', submitSwap);

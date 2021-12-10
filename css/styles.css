@@ -117,7 +117,9 @@ label {
   font-weight: 700;
 }
 
-#submit:hover {
+#submit:hover,
+.btn:hover,
+a:hover {
   cursor: pointer;
 }
 
