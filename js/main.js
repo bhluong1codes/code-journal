@@ -6,6 +6,8 @@ var $img = document.querySelector('img');
 var $form = document.querySelector('form');
 var $title = document.querySelector('#title');
 var $notes = document.querySelector('#notes');
+var $body = document.querySelector('body');
+var $view = document.querySelectorAll('.view');
 
 $photoUrl.addEventListener('input', function (event) {
   if ($photoUrl.value === '') {
@@ -83,11 +85,6 @@ function createEntry(event) {
 
 }
 
-window.addEventListener('DOMContentLoaded', createEntry);
-
-var $body = document.querySelector('body');
-var $view = document.querySelectorAll('.view');
-
 function viewSwap(event) {
   if (event.target.className.includes('newBtn') || event.target.matches('.link')) {
     var $dataView = event.target.getAttribute('data-view');
@@ -141,5 +138,17 @@ function addEntry(event) {
 
 }
 
+function loadView(event) {
+  for (var i = 0; i < $view.length; i++) {
+    if (data.view === $view[i].getAttribute('data-view')) {
+      $view[i].className = 'view';
+    } else {
+      $view[i].className = 'view hidden';
+    }
+  }
+}
+
 $body.addEventListener('click', viewSwap);
 $body.addEventListener('submit', submitSwap);
+window.addEventListener('DOMContentLoaded', createEntry);
+window.addEventListener('DOMContentLoaded', loadView);
