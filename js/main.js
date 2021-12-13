@@ -6,8 +6,9 @@ var $img = document.querySelector('img');
 var $form = document.querySelector('form');
 var $title = document.querySelector('#title');
 var $notes = document.querySelector('#notes');
-var $body = document.querySelector('body');
 var $view = document.querySelectorAll('.view');
+var $link = document.querySelector('.link');
+var $newBtn = document.querySelector('.newBtn');
 
 $photoUrl.addEventListener('input', function (event) {
   if ($photoUrl.value === '') {
@@ -86,27 +87,12 @@ function createEntry(event) {
 }
 
 function viewSwap(event) {
-  if (event.target.className.includes('newBtn') || event.target.matches('.link')) {
-    var $dataView = event.target.getAttribute('data-view');
-    for (var i = 0; i < $view.length; i++) {
-      if ($dataView === $view[i].getAttribute('data-view')) {
-        $view[i].className = 'view';
-      } else {
-        $view[i].className = 'view hidden';
-      }
-    }
-  }
-}
-
-function submitSwap(event) {
-  if (event.target.tagName === 'FORM') {
-    var $dataView = event.target.getAttribute('data-view');
-    for (var i = 0; i < $view.length; i++) {
-      if ($dataView === $view[i].getAttribute('data-view')) {
-        $view[i].className = 'view';
-      } else {
-        $view[i].className = 'view hidden';
-      }
+  var $dataView = event.target.getAttribute('data-view');
+  for (var i = 0; i < $view.length; i++) {
+    if ($dataView === $view[i].getAttribute('data-view')) {
+      $view[i].className = 'view';
+    } else {
+      $view[i].className = 'view hidden';
     }
   }
 }
@@ -148,7 +134,8 @@ function loadView(event) {
   }
 }
 
-$body.addEventListener('click', viewSwap);
-$body.addEventListener('submit', submitSwap);
+$link.addEventListener('click', viewSwap);
+$newBtn.addEventListener('click', viewSwap);
+window.addEventListener('submit', viewSwap);
 window.addEventListener('DOMContentLoaded', createEntry);
 window.addEventListener('DOMContentLoaded', loadView);
