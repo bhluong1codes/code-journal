@@ -70,6 +70,7 @@ function renderEntry(entry) {
   $divTitle.setAttribute('class', 'title-flex');
   var $icon = document.createElement('i');
   $icon.setAttribute('class', 'fas fa-pen');
+  $icon.setAttribute('data-view', 'entry-form');
   var $imgContainer = document.createElement('div');
   $imgContainer.setAttribute('class', 'img-container');
   var $img = document.createElement('img');
@@ -121,4 +122,7 @@ window.addEventListener('DOMContentLoaded', function (event) {
 window.addEventListener('DOMContentLoaded', loadView);
 
 $entries.addEventListener('click', function (event) {
+  if (event.target.tagName === 'I') {
+    viewSwap(event);
+  }
 });

@@ -125,7 +125,8 @@ label {
 
 #submit:hover,
 .btn:hover,
-a:hover {
+a:hover,
+.fas:hover {
   cursor: pointer;
 }
 
