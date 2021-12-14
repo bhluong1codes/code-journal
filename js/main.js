@@ -119,3 +119,6 @@ window.addEventListener('DOMContentLoaded', function (event) {
   }
 });
 window.addEventListener('DOMContentLoaded', loadView);
+
+$entries.addEventListener('click', function (event) {
+});
