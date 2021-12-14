@@ -9,6 +9,8 @@ var $notes = document.querySelector('#notes');
 var $view = document.querySelectorAll('.view');
 var $link = document.querySelector('.link');
 var $newBtn = document.querySelector('.newBtn');
+var $entries = document.querySelector('.entries-list');
+var $noEntriesMsg = document.querySelector('.no-entries-msg');
 
 $photoUrl.addEventListener('input', function (event) {
   if ($photoUrl.value === '') {
@@ -34,7 +36,7 @@ $form.addEventListener('submit', function (event) {
   data.entries.unshift(entry);
   $form.reset();
   $img.src = 'images/placeholder-image-square.jpg';
-  addEntry();
+  $entries.prepend(renderEntry(data.entries[0]));
 });
 
 // <li class="row">
@@ -53,37 +55,26 @@ $form.addEventListener('submit', function (event) {
 //   </div>
 // </li>
 
-function createEntry(event) {
-  var $entries = document.querySelector('.entries-list');
-  var $noEntry = document.createElement('li');
-  $noEntry.setAttribute('class', 'no-entries-msg');
-  if (data.entries.length === 0) {
-    $entries.appendChild($noEntry);
-  } else if (data.entries.length > 0) {
-    for (var i = 0; i < data.entries.length; i++) {
-      var $entry = document.createElement('li');
-      $entry.setAttribute('class', 'row');
-      var $divCol = document.createElement('div');
-      $divCol.setAttribute('class', 'column-half');
-      var $divCol2 = document.createElement('div');
-      $divCol2.setAttribute('class', 'column-half');
-      var $imgContainer = document.createElement('div');
-      $imgContainer.setAttribute('class', 'img-container');
-      var $img = document.createElement('img');
-      $img.setAttribute('src', data.entries[i].photoUrl);
-      var $h3 = document.createElement('h3');
-      $h3.textContent = data.entries[i].title;
-      var $p = document.createElement('p');
-      $p.textContent = data.entries[i].notes;
-      $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
-      $entry.appendChild($divCol2).appendChild($h3);
-      $divCol2.appendChild($p);
-      $entries.appendChild($entry);
-    }
-    var $childNodes = $entries.childNodes;
-    $childNodes[1].remove();
-  }
-
+function renderEntry(entry) {
+  var $entry = document.createElement('li');
+  $entry.setAttribute('class', 'row');
+  var $divCol = document.createElement('div');
+  $divCol.setAttribute('class', 'column-half');
+  var $divCol2 = document.createElement('div');
+  $divCol2.setAttribute('class', 'column-half');
+  var $imgContainer = document.createElement('div');
+  $imgContainer.setAttribute('class', 'img-container');
+  var $img = document.createElement('img');
+  $img.setAttribute('src', entry.photoUrl);
+  var $h3 = document.createElement('h3');
+  $h3.textContent = entry.title;
+  var $p = document.createElement('p');
+  $p.textContent = entry.notes;
+  $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
+  $entry.appendChild($divCol2).appendChild($h3);
+  $divCol2.appendChild($p);
+  $noEntriesMsg.style.display = 'none';
+  return $entry;
 }
 
 function viewSwap(event) {
@@ -95,33 +86,6 @@ function viewSwap(event) {
       $view[i].className = 'view hidden';
     }
   }
-}
-
-function addEntry(event) {
-  var $entries = document.querySelector('.entries-list');
-  var $entry = document.createElement('li');
-  $entry.setAttribute('class', 'row');
-  var $divCol = document.createElement('div');
-  $divCol.setAttribute('class', 'column-half');
-  var $divCol2 = document.createElement('div');
-  $divCol2.setAttribute('class', 'column-half');
-  var $imgContainer = document.createElement('div');
-  $imgContainer.setAttribute('class', 'img-container');
-  var $img = document.createElement('img');
-  $img.setAttribute('src', data.entries[0].photoUrl);
-  var $h3 = document.createElement('h3');
-  $h3.textContent = data.entries[0].title;
-  var $p = document.createElement('p');
-  $p.textContent = data.entries[0].notes;
-  $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
-  $entry.appendChild($divCol2).appendChild($h3);
-  $divCol2.appendChild($p);
-  $entries.prepend($entry);
-  var $noEntries = document.querySelector('.no-entries-msg');
-  if ($noEntries) {
-    $noEntries.remove();
-  }
-
 }
 
 function loadView(event) {
@@ -137,5 +101,9 @@ function loadView(event) {
 $link.addEventListener('click', viewSwap);
 $newBtn.addEventListener('click', viewSwap);
 window.addEventListener('submit', viewSwap);
-window.addEventListener('DOMContentLoaded', createEntry);
+window.addEventListener('DOMContentLoaded', function (event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    $entries.appendChild(renderEntry(data.entries[i]));
+  }
+});
 window.addEventListener('DOMContentLoaded', loadView);
