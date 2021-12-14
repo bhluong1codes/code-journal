@@ -46,9 +46,12 @@ $form.addEventListener('submit', function (event) {
 //     </div>
 //   </div>
 //   <div class="column-half">
+// <div class="title-flex">
 //     <h3>
 //       data.title;
 //     </h3>
+//     <i class="fas fa-pen"></i>
+//  </div>
 //     <p>
 //       data.notes;
 //     </p>
@@ -58,21 +61,30 @@ $form.addEventListener('submit', function (event) {
 function renderEntry(entry) {
   var $entry = document.createElement('li');
   $entry.setAttribute('class', 'row');
+  $entry.setAttribute('id', entry);
   var $divCol = document.createElement('div');
   $divCol.setAttribute('class', 'column-half');
   var $divCol2 = document.createElement('div');
   $divCol2.setAttribute('class', 'column-half');
+  var $divTitle = document.createElement('div');
+  $divTitle.setAttribute('class', 'title-flex');
+  var $icon = document.createElement('i');
+  $icon.setAttribute('class', 'fas fa-pen');
   var $imgContainer = document.createElement('div');
   $imgContainer.setAttribute('class', 'img-container');
   var $img = document.createElement('img');
   $img.setAttribute('src', entry.photoUrl);
   var $h3 = document.createElement('h3');
   $h3.textContent = entry.title;
+  $divTitle.appendChild($h3);
+  $divTitle.appendChild($icon);
   var $p = document.createElement('p');
   $p.textContent = entry.notes;
-  $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
-  $entry.appendChild($divCol2).appendChild($h3);
+  $divCol2.appendChild($divTitle);
   $divCol2.appendChild($p);
+  $entry.appendChild($divCol).appendChild($imgContainer).appendChild($img);
+  $entry.appendChild($divCol2);
+
   $noEntriesMsg.style.display = 'none';
   return $entry;
 }
