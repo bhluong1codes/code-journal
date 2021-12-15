@@ -124,5 +124,7 @@ window.addEventListener('DOMContentLoaded', loadView);
 $entries.addEventListener('click', function (event) {
   if (event.target.tagName === 'I') {
     viewSwap(event);
+    var index = event.target.closest('li').getAttribute('data-entry-id');
+    data.editing = data.entries[index - 1];
   }
 });
