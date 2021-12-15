@@ -132,5 +132,11 @@ function editEntry(event) {
         data.editing = data.entries[i];
       }
     }
+    viewSwap(event);
   }
+
+  $title.setAttribute('value', data.editing.title);
+  $photoUrl.setAttribute('value', data.editing.photoUrl);
+  $img.src = data.editing.photoUrl;
+  $notes.textContent = data.editing.notes;
 }
