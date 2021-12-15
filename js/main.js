@@ -32,11 +32,12 @@ $form.addEventListener('submit', function (event) {
     notes: notesValue,
     entryId: data.nextEntryId
   };
-  data.nextEntryId++;
+
   data.entries.unshift(entry);
   $form.reset();
   $img.src = 'images/placeholder-image-square.jpg';
   $entries.prepend(renderEntry(data.entries[0]));
+  data.nextEntryId++;
 });
 
 // <li class="row">
@@ -121,10 +122,15 @@ window.addEventListener('DOMContentLoaded', function (event) {
 });
 window.addEventListener('DOMContentLoaded', loadView);
 
-$entries.addEventListener('click', function (event) {
+$entries.addEventListener('click', editEntry);
+
+function editEntry(event) {
   if (event.target.tagName === 'I') {
-    viewSwap(event);
-    var index = event.target.closest('li').getAttribute('data-entry-id');
-    data.editing = data.entries[index - 1];
+    var id = parseInt(event.target.closest('li').getAttribute('data-entry-id'));
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === id) {
+        data.editing = data.entries[i];
+      }
+    }
   }
-});
+}
