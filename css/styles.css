@@ -58,6 +58,12 @@ ul {
   margin: 0;
 }
 
+.fa,
+.fas {
+  font-size: 1.5rem;
+  color: #562b81;
+}
+
 h2 {
   font-size: 2rem;
 }
@@ -119,11 +125,13 @@ label {
 
 #submit:hover,
 .btn:hover,
-a:hover {
+a:hover,
+.fas:hover {
   cursor: pointer;
 }
 
-.entries-subheader {
+.entries-subheader,
+.title-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -136,10 +144,6 @@ a:hover {
 @media only screen and (min-width: 768px) {
   .title-label {
     padding-top: 0;
-  }
-
-  .entries-list h3 {
-    margin-top: 0;
   }
 
   img {
