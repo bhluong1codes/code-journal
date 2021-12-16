@@ -11,6 +11,7 @@ var $link = document.querySelector('.link');
 var $newBtn = document.querySelector('.newBtn');
 var $entries = document.querySelector('.entries-list');
 var $noEntriesMsg = document.querySelector('.no-entries-msg');
+var $h2 = document.querySelector('h2');
 
 $photoUrl.addEventListener('input', function (event) {
   if ($photoUrl.value === '') {
@@ -25,7 +26,7 @@ $form.addEventListener('submit', function (event) {
   var titleValue = $title.value;
   var photoUrlValue = $photoUrl.value;
   var notesValue = $notes.value;
-
+  var $entry = document.querySelectorAll('.entry');
   var entry = {
     title: titleValue,
     photoUrl: photoUrlValue,
@@ -33,11 +34,22 @@ $form.addEventListener('submit', function (event) {
     entryId: data.nextEntryId
   };
 
-  data.entries.unshift(entry);
-  $form.reset();
-  $img.src = 'images/placeholder-image-square.jpg';
-  $entries.prepend(renderEntry(data.entries[0]));
-  data.nextEntryId++;
+  if ($h2.textContent === 'Edit Entry') {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.editing === data.entries[i]) {
+        data.entries[i].title = titleValue;
+        data.entries[i].photoUrl = photoUrlValue;
+        data.entries[i].notes = notesValue;
+        $entry[i].replaceWith(renderEntry(data.entries[i]));
+      }
+    }
+  } else if ($h2.textContent === 'New Entry') {
+    data.entries.unshift(entry);
+    $entries.prepend(renderEntry(data.entries[0]));
+    data.nextEntryId++;
+  }
+
+  resetForm();
 });
 
 // <li class="row">
@@ -61,7 +73,7 @@ $form.addEventListener('submit', function (event) {
 
 function renderEntry(entry) {
   var $entry = document.createElement('li');
-  $entry.setAttribute('class', 'row');
+  $entry.setAttribute('class', 'row entry');
   $entry.setAttribute('data-entry-id', entry.entryId);
   var $divCol = document.createElement('div');
   $divCol.setAttribute('class', 'column-half');
@@ -112,8 +124,20 @@ function loadView(event) {
   }
 }
 
+function resetForm() {
+  $form.reset();
+  $img.src = 'images/placeholder-image-square.jpg';
+  $h2.textContent = 'New Entry';
+  $title.setAttribute('value', '');
+  $photoUrl.setAttribute('value', '');
+  $notes.textContent = '';
+}
+
 $link.addEventListener('click', viewSwap);
-$newBtn.addEventListener('click', viewSwap);
+$newBtn.addEventListener('click', function (event) {
+  resetForm();
+  viewSwap(event);
+});
 window.addEventListener('submit', viewSwap);
 window.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
@@ -139,4 +163,5 @@ function editEntry(event) {
   $photoUrl.setAttribute('value', data.editing.photoUrl);
   $img.src = data.editing.photoUrl;
   $notes.textContent = data.editing.notes;
+  $h2.textContent = 'Edit Entry';
 }
