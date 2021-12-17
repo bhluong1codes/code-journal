@@ -40,9 +40,11 @@ ul {
   font-size: 1.2rem;
 }
 
-.btn {
+.ctas {
   margin-top: 10px;
-  margin-bottom: 20px;
+}
+
+.btn {
   text-transform: uppercase;
   width: auto;
   float: right;
@@ -54,8 +56,19 @@ ul {
   font-weight: 600;
 }
 
+.deletebtn {
+  border: none;
+  color: red;
+  padding: 0;
+  text-decoration: underline;
+}
+
 .new-btn {
   margin: 0;
+}
+
+.cta {
+  margin-top: 10px;
 }
 
 .fa,
@@ -126,7 +139,8 @@ label {
 #submit:hover,
 .btn:hover,
 a:hover,
-.fas:hover {
+.fas:hover,
+.deletebtn:hover {
   cursor: pointer;
 }
 

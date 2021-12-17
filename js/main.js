@@ -137,6 +137,7 @@ $link.addEventListener('click', viewSwap);
 $newBtn.addEventListener('click', function (event) {
   resetForm();
   viewSwap(event);
+  toggleDeleteBtn();
 });
 window.addEventListener('submit', viewSwap);
 window.addEventListener('DOMContentLoaded', function (event) {
@@ -157,11 +158,32 @@ function editEntry(event) {
       }
     }
     viewSwap(event);
+    $title.setAttribute('value', data.editing.title);
+    $photoUrl.setAttribute('value', data.editing.photoUrl);
+    $img.src = data.editing.photoUrl;
+    $notes.textContent = data.editing.notes;
+    $h2.textContent = 'Edit Entry';
+    toggleDeleteBtn();
   }
-
-  $title.setAttribute('value', data.editing.title);
-  $photoUrl.setAttribute('value', data.editing.photoUrl);
-  $img.src = data.editing.photoUrl;
-  $notes.textContent = data.editing.notes;
-  $h2.textContent = 'Edit Entry';
 }
+
+var $deleteBtn = document.querySelector('.deletebtn');
+function toggleDeleteBtn(event) {
+  if ($h2.textContent === 'Edit Entry') {
+    $deleteBtn.className = 'deletebtn';
+  } else {
+    $deleteBtn.className = 'deletebtn hidden';
+  }
+}
+
+$deleteBtn.addEventListener('click');
+
+// function deleteEntry(event) {
+//   var $entry = document.querySelectorAll('.entry');
+//   for (var i = 0; i < data.entries.length; i++) {
+//     if (data.entries[i] === data.editing) {
+//       $entry[i].remove();
+//       data.entries.splice(i, 1);
+//     }
+//   }
+// }
