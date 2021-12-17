@@ -181,18 +181,26 @@ $deleteBtn.addEventListener('click', function () {
   $overlay.style.display = 'flex';
 });
 
-// $deleteBtn.addEventListener('click');
+var $cancelBtn = document.querySelector('.cancel-btn');
+var $confirmBtn = document.querySelector('.confirm-btn');
 
-// function deleteEntry(event) {
-//   var $entry = document.querySelectorAll('.entry');
-//   for (var i = 0; i < data.entries.length; i++) {
-//     if (data.entries[i] === data.editing) {
-//       $entry[i].remove();
-//       data.entries.splice(i, 1);
-//     }
-//   }
-// }
+$cancelBtn.addEventListener('click', function () {
+  $overlay.style.display = 'none';
+});
 
-// function displayPopup(event) {
+$confirmBtn.addEventListener('click', deleteEntry);
+$confirmBtn.addEventListener('click', viewSwap);
 
-// }
+function deleteEntry(event) {
+  var $entry = document.querySelectorAll('.entry');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i] === data.editing) {
+      $entry[i].remove();
+      data.entries.splice(i, 1);
+    }
+  }
+  $overlay.style.display = 'none';
+  if (data.entries.length === 0) {
+    $noEntriesMsg.style.display = 'block';
+  }
+}
