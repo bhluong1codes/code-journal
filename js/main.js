@@ -167,16 +167,21 @@ function editEntry(event) {
   }
 }
 
-var $deleteBtn = document.querySelector('.deletebtn');
+var $deleteBtn = document.querySelector('.open-modal');
 function toggleDeleteBtn(event) {
   if ($h2.textContent === 'Edit Entry') {
-    $deleteBtn.className = 'deletebtn';
+    $deleteBtn.className = 'open-modal';
   } else {
-    $deleteBtn.className = 'deletebtn hidden';
+    $deleteBtn.className = 'open-modal hidden';
   }
 }
+var $overlay = document.querySelector('.overlay');
 
-$deleteBtn.addEventListener('click');
+$deleteBtn.addEventListener('click', function () {
+  $overlay.style.display = 'flex';
+});
+
+// $deleteBtn.addEventListener('click');
 
 // function deleteEntry(event) {
 //   var $entry = document.querySelectorAll('.entry');
@@ -186,4 +191,8 @@ $deleteBtn.addEventListener('click');
 //       data.entries.splice(i, 1);
 //     }
 //   }
+// }
+
+// function displayPopup(event) {
+
 // }
