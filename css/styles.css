@@ -90,7 +90,6 @@ ul {
   padding-top: 12px;
   padding-bottom: 12px;
   color: #fff;
-  font-size: 1.2rem;
 }
 
 .ctas {
@@ -105,8 +104,6 @@ ul {
   background-color: #562b81;
   color: #fff;
   border: none;
-  border-radius: 3px;
-  font-weight: 600;
 }
 
 .open-modal {
