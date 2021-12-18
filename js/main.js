@@ -137,6 +137,7 @@ $link.addEventListener('click', viewSwap);
 $newBtn.addEventListener('click', function (event) {
   resetForm();
   viewSwap(event);
+  toggleDeleteBtn();
 });
 window.addEventListener('submit', viewSwap);
 window.addEventListener('DOMContentLoaded', function (event) {
@@ -157,11 +158,49 @@ function editEntry(event) {
       }
     }
     viewSwap(event);
+    $title.setAttribute('value', data.editing.title);
+    $photoUrl.setAttribute('value', data.editing.photoUrl);
+    $img.src = data.editing.photoUrl;
+    $notes.textContent = data.editing.notes;
+    $h2.textContent = 'Edit Entry';
+    toggleDeleteBtn();
   }
+}
 
-  $title.setAttribute('value', data.editing.title);
-  $photoUrl.setAttribute('value', data.editing.photoUrl);
-  $img.src = data.editing.photoUrl;
-  $notes.textContent = data.editing.notes;
-  $h2.textContent = 'Edit Entry';
+var $deleteBtn = document.querySelector('.open-modal');
+function toggleDeleteBtn(event) {
+  if ($h2.textContent === 'Edit Entry') {
+    $deleteBtn.className = 'open-modal';
+  } else {
+    $deleteBtn.className = 'open-modal hidden';
+  }
+}
+var $overlay = document.querySelector('.overlay');
+
+$deleteBtn.addEventListener('click', function () {
+  $overlay.style.display = 'flex';
+});
+
+var $cancelBtn = document.querySelector('.cancel-btn');
+var $confirmBtn = document.querySelector('.confirm-btn');
+
+$cancelBtn.addEventListener('click', function () {
+  $overlay.style.display = 'none';
+});
+
+$confirmBtn.addEventListener('click', deleteEntry);
+$confirmBtn.addEventListener('click', viewSwap);
+
+function deleteEntry(event) {
+  var $entry = document.querySelectorAll('.entry');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i] === data.editing) {
+      $entry[i].remove();
+      data.entries.splice(i, 1);
+    }
+  }
+  $overlay.style.display = 'none';
+  if (data.entries.length === 0) {
+    $noEntriesMsg.style.display = 'block';
+  }
 }
